@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Objektai</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mt-2">Reg Forma</h1>
+    <div class="row mt-5">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Vardas</label>
+            <input class="form-control" name="firstname" type="text">
+        </div>
+            <div class="form-group">
+                <label>el-pastas</label>
+                <input class="form-control" name="email" type="email">
+        </div>
+        <div class="form-group">
+            <label>gimimo metai</label>
+            <input class="form-control" name="birthday" type="date">
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Pavarde</label>
+            <input class="form-control" name="lastname" type="text">
+        </div>
+        <div class="form-group">
+            <label>Tel.Numeris</label>
+            <input class="form-control" name="phone" type="text" maxlength="12" minlength="9">
+        </div>
+        <div class="form-group">
+            <label>Adresas</label>
+            <input class="form-control" name="adress" type="text">
+        </div>
+        </div>
+        <div class="col-md-12">
+        <button class="btn btn-primary" id="save"> Saugoti </button>
+    </div>
+</div>
+    <div class="row mt-5">
+        <div class="col-md-12 mt-2">
+            <h2 class="text-center">Duomenu Atvaizdavimas</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Vardas</th>
+                    <th>Pavarde</th>
+                    <th>El.pastas</th>
+                    <th>Tel.Nr</th>
+                    <th>Gimimo data</th>
+                    <th>Adresas</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="script/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="script/js.js"></script>
+</body>
+</html>
