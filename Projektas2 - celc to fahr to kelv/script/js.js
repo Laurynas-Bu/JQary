@@ -17,11 +17,10 @@ var celcius, kelvin, fahrenheit;
         });
 
         fahrenheit.on ('input', function () {
-            celcius.val((parseFloat(this.value) - 32) / 1.8);
-            kelvin.val((parseFloat(this.value) + 459.67) * 5/9);
+          celci =  celcius.val((parseFloat(this.value) - 32) / 1.8);
+          kelvi = kelvin.val((parseFloat(this.value) + 459.67) * 5/9);
+
         });
-
-
 
 
 // kelvin.value = (parseFloat(this.value) + 273.15).toFixed(2);
