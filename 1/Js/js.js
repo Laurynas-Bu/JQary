@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
 
     $('.zalias').on('click', function () {
-        var number = parseInt ($('.geltonas, .raudonas').text());
+        parseInt ($('.geltonas, .raudonas').text());
         $('.geltonas, .raudonas').text(0);
     });
 
