@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $('#save').click(function () {
-        doit();
+        allIn();
     });
 
-    function doit() {
+    function allIn() {
 
         var check = $('#forma');
         var error = 'Užpildykite visus laukus';
@@ -15,6 +15,7 @@ $(document).ready(function () {
             }
             console.log(check);
         });
+
 
            // if (check.elements[i].value === '' ){
               //  alert(error);
