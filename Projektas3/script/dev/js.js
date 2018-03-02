@@ -5,27 +5,18 @@ $(document).ready(function () {
 
     function allIn() {
 
-        var check = $('#forma');
+        var check = $('#forma input');
         var error = 'Užpildykite visus laukus';
-
-        check.each(function(){
-            if (check.val === '') {
-                alert(error);
-                return
+        var html ='<tr>';
+        check.each(function(i, formInput){
+            if (check.eq(i).val() === '') {
+                    alert(error);
+                    return false
             }
-            console.log(check);
+            html +='<td>' + check.eq(i).val() + '</td>';
         });
-
-
-           // if (check.elements[i].value === '' ){
-              //  alert(error);
-              //  return
-           // }
-        //};
-
-      //  table ();
-//}
-
+        html +='</tr>';
+        $('.table tbody').append(html);
     }
 });
 
