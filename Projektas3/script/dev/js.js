@@ -5,27 +5,21 @@ $(document).ready(function () {
 
     function allIn() {
 
-        var check = $('#forma');
+        var check = $('#forma input');
         var error = 'Užpildykite visus laukus';
 
-        check.each(function(){
-            if (check.val === '') {
+        check.each(function(i){
+            if (check.eq(i).val() === '') {
                 alert(error);
-                return
+                return false
             }
-            console.log(check);
+
+            html = '<tr>';
+            $('table tbody').append(html += check.eq(i).val());
+            html += '</tr>';
+
         });
-
-
-           // if (check.elements[i].value === '' ){
-              //  alert(error);
-              //  return
-           // }
-        //};
-
-      //  table ();
-//}
-
+        console.log (check)
     }
 });
 
