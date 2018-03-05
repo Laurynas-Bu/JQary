@@ -31,7 +31,7 @@
 
             showOtherMonths: false,
             selectOtherMonths: false,
-            moveToOtherMonthsOnSelect: true,
+            moveToOtherMonthsOnSelect: false,
 
             showOtherYears: true,
             selectOtherYears: true,
