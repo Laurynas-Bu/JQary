@@ -114,29 +114,29 @@
       -ms-flex: 1;
           flex: 1;
   text-align: center;
-  font-size: 18px; }
+  font-size: 17px; }
 
 .datepicker--cell-day {
-  width: 11.28571%;
-  height: 36px;
-  margin: 0 5.49px}
+  width: 12%;
+  height: 35px;
+  margin: 2px 3.78px}
 
 .datepicker--cells-months {
-  height: 170px; }
+    height: 341px; }
 
 .datepicker--cell-month {
-  width: 33.33%;
+  width: 25%;
   height: 25%; }
 
 .datepicker--years {
-  height: 170px; }
+    height: 300px; }
 
 .datepicker--cells-years {
-  height: 170px; }
+    height: 300px; }
 
 .datepicker--cell-year {
   width: 25%;
-  height: 33.33%; }
+  height: 25%; }
 
 .datepicker--cell-day.-other-month-, .datepicker--cell-year.-other-decade- {
   color: #dedede; }
@@ -178,7 +178,7 @@
   font-family: "Avenir Medium", sans-serif;
   font-size: 17px;
   color: #4a4a4a;
-  width: 395px;
+  width: 350px;
   min-height: 341px;
   position: absolute;
   left: -100000px;

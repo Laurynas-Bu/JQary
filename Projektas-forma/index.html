@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Objektai</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" href="Air-Date/dist/css/datepicker.css"/>
+    <link rel="stylesheet" href="Air-Date/docs/css/style.css"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mt-2">Reg Forma</h1>
+
+    <form id="forma">
+    <div class="row mt-5">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Vardas</label>
+            <input class="form-control" name="Vardas" type="text">
+        </div>
+            <div class="form-group">
+                <label>El.paštas</label>
+                <input class="form-control" name="El.paštas" type="email">
+        </div>
+        <div class="form-group">
+            <label>Gimimo Metai</label>
+            <input class="form-control" name="Gimimo Metai" type="date">
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Pavarde</label>
+            <input class="form-control" name="Pavardė" type="text">
+        </div>
+        <div class="form-group">
+            <label>Tel.Numeris</label>
+            <input class="form-control" name="Tel.Numeris" type="text" maxlength="12" minlength="9">
+        </div>
+        <div class="form-group">
+            <label>Adresas</label>
+            <input class="form-control" name="Adresas" type="text">
+        </div>
+        </div>
+</div>
+</form>
+<div class="col-md-6">
+    <button class="btn btn-primary" id="save"> Saugoti </button>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>DATA<i class="fas fa-caret-down"></i></th>
+                    <th>ŠAUDYMO TIPAS<i class="fas fa-caret-down"></i></th>
+                    <th>ŠAUDYMO DISCIPLINA<i class="fas fa-caret-down"></i></th>
+                    <th>RENGINIO PAVADINIMAS<i class="fas fa-caret-down"></i></th>
+                    <th>ŠALIS<i class="fas fa-caret-down"></i></th>
+                    <th>MIESTAS<i class="fas fa-caret-down"></i></th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        </div>
+
+            <div class="row">
+                <div class="vt-tile">
+                    <div class="datepicker-here"></div>
+                </div>
+            </div>
+</div>
+<script src="script/dev/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Air-Date/dist/js/datepicker.js"></script>
+<script src="script/dev/js.js"></script>
+</body>
+</html>
