@@ -1,16 +1,10 @@
-@font-face {
-  src:url('https://github.com/potyt/fonts/blob/master/macfonts/Avenir/Avenir-Heavy.ttf') format('truetype'),
-  url('https://github.com/potyt/fonts/blob/master/macfonts/Avenir/Avenir-Medium.ttf') format('truetype'),
-  url('https://github.com/potyt/fonts/blob/master/macfonts/Avenir/Avenir-Light.ttf') format('truetype');
-}
-
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 body {
-  font-family: "Avenir Heavy", sans-serif;
+  font-family: "Avenir Heavy", "Avenir Light", "Avenir Medium", sans-serif;
   background-color: #f5f5f5;
   letter-spacing: 1px;
 }
