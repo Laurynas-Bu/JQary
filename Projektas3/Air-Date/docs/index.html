@@ -75,7 +75,7 @@ Lets add extra elements to several dates, and show `lorem` text when selecting t
             'Ratio quidem vestra sic cogit. Illi enim inter se dissentiunt. Tu vero, inquam, ducas licet, si sequetur; Non semper, inquam; ',
             'Duo Reges: constructio interrete. A mene tu? Ea possunt paria non esse. Est, ut dicis, inquam. Scaevolam M. Quid iudicant sensus? ',
             'Poterat autem inpune; Qui est in parvis malis. Prave, nequiter, turpiter cenabat; Ita credo. '
-        ]
+        ];
 $picker.datepicker({
     language: 'en',
     onRenderCell: function (date, cellType) {
@@ -87,15 +87,15 @@ $picker.datepicker({
         }
     },
     onSelect: function onSelect(fd, date) {
-        var title = '', content = ''
+        var title = '', content = '';
         if (date && eventDates.indexOf(date.getDate()) != -1) {
             title = fd;
             content = sentences[Math.floor(Math.random() * eventDates.length)];
         }
-        $('strong', $content).html(title)
+        $('strong', $content).html(title);
         $('p', $content).html(content)
     }
-})
+});
 var currentDate = new Date();
 $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 10))</script></div><pre class="example-code"><code class="js">var eventDates = [1, 10, 12, 22],
     $picker = $('&#35;custom-cells'),

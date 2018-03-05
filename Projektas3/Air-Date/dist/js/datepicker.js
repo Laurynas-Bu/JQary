@@ -12,8 +12,8 @@
             '</div>',
         defaults = {
             classes: '',
-            inline: false,
-            language: 'ru',
+            inline: true,
+            language: 'lt',
             startDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
@@ -29,8 +29,8 @@
             view: 'days',
             minView: 'days',
 
-            showOtherMonths: true,
-            selectOtherMonths: true,
+            showOtherMonths: false,
+            selectOtherMonths: false,
             moveToOtherMonthsOnSelect: true,
 
             showOtherYears: true,
@@ -45,7 +45,7 @@
             multipleDatesSeparator: ',',
             range: false,
 
-            todayButton: false,
+            todayButton: true,
             clearButton: false,
 
             showEvent: 'focus',
@@ -223,13 +223,13 @@
             if (typeof lang == 'string') {
                 this.loc = $.fn.datepicker.language[lang];
                 if (!this.loc) {
-                    console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "ru" instead');
-                    this.loc = $.extend(true, {}, $.fn.datepicker.language.ru)
+                    console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "lt" instead');
+                    this.loc = $.extend(true, {}, $.fn.datepicker.language.lt)
                 }
 
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, $.fn.datepicker.language[lang])
+                this.loc = $.extend(true, {}, $.fn.datepicker.language.lt, $.fn.datepicker.language[lang])
             } else {
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, lang)
+                this.loc = $.extend(true, {}, $.fn.datepicker.language.lt, lang)
             }
 
             if (this.opts.dateFormat) {
@@ -1472,16 +1472,17 @@
     $.fn.datepicker.Constructor = Datepicker;
 
     $.fn.datepicker.language = {
-        ru: {
-            days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            daysShort: ['Вос','Пон','Вто','Сре','Чет','Пят','Суб'],
-            daysMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-            today: 'Сегодня',
-            clear: 'Очистить',
-            dateFormat: 'dd.mm.yyyy',
-            timeFormat: 'hh:ii',
+        lt: {
+            days: ['Sekmadienis', 'Pirmadienis', 'Antradienis', 'Trečiadienis', 'Ketvirtadienis', 'Penktadienis', 'Šeštadienis'],
+            daysShort: ['Sek', 'Pir', 'Ant', 'Tre', 'Ket', 'Pen', 'Šeš'],
+            daysMin: ['Sk', 'Pr', 'An', 'Tr', 'Ke', 'Pn', 'Še'],
+            months: ['Sausis','Vasaris','Kovas','Balandis','Gegužė','Birželis', 'Liepa','Rugpjūtis','Rugsėjis','Spalis','Lapkritis','Gruodis'],
+            menesiai: ['Sausio','Vasario','Kovo','Balandžio','Gegužės','Birželio', 'Liepos','Rugpjūčio','Rugsėjo','Spalio','Lapkritičio','Gruodžio'],
+            monthsShort: ['Sau', 'Vas', 'Kov', 'Bal', 'Geg', 'Bir', 'Lie', 'Rgp', 'Rgs', 'Spa', 'Lap', 'Gru'],
+            today: 'Šiandien',
+            clear: 'Valyti',
+            dateFormat: 'yyyy-mm-dd',
+            timeFormat: 'hh:ii:aa',
             firstDay: 1
         }
     };
@@ -2234,3 +2235,4 @@
     };
 })();
  })(window, jQuery);
+
