@@ -39,7 +39,7 @@
 
             minDate: new Date(),
             maxDate: '',
-            disableNavWhenOutOfRange: false,
+            disableNavWhenOutOfRange: true,
 
             multipleDates: false, // Boolean or Number
             multipleDatesSeparator: ',',
