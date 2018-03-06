@@ -66,8 +66,24 @@ $('#disabled-days').datepicker({
         }
     }
 })
-</code></pre></div><h3 id="example-custom-content">Custom cells content</h3><p>Air Datepicker allows you to change contents of cells like you want. You could use<span class="example-inline"><code>onRenderCell</code></span>for this purpose.
-Lets add extra elements to several dates, and show `lorem` text when selecting them.</p><div class="example"><div class="example--label">Example</div><div class="example-content"><div class="list-inline"><div><div id="custom-cells"></div></div><div id="custom-cells-events"><strong></strong><p></p></div></div><script>var eventDates = [1, 10, 12, 22],
+</code></pre></div>
+    <h3 id="example-custom-content">Custom cells content</h3>
+    <p>Air Datepicker allows you to change contents of cells like you want. You could use<span class="example-inline"><code>onRenderCell</code></span>for this purpose.
+Lets add extra elements to several dates, and show `lorem` text when selecting them.</p>
+    <div class="example">
+        <div class="example--label">Example</div>
+        <div class="example-content">
+            <div class="list-inline">
+                <div>
+                    <div id="custom-cells"></div>
+                </div>
+    <div id="custom-cells-events">
+        <strong></strong>
+        <p></p>
+    </div>
+    </div>
+    <script>
+        var eventDates = [1, 10, 12, 22],
         $picker = $('#custom-cells'),
         $content = $('#custom-cells-events'),
         sentences = [

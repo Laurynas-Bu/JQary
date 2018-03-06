@@ -2,10 +2,12 @@ $(document).ready(function () {
     var eventDates = [1, 10, 12, 22],
         $picker = $('#custom-cells'),
         $content = $('#custom-cells-events'),
-        sentences = [  ];
+        sentences = [ 'Lorem',
+            'Lorem',
+            'Lorem',
+            'Lorem'];
 
     $picker.datepicker({
-        language: 'en',
         onRenderCell: function (date, cellType) {
             var currentDate = date.getDate();
             // Add extra element, if `eventDates` contains `currentDate`
