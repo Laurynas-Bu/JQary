@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+  margin-top: 10px;
+  #custom-cells-events {
+    margin-left: 20px;
+  }
+}
+.button-holder {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.available {
+  position: absolute;
+  background: #cccccc;
+  width: 4px;
+  height: 4px;
+  border-radius: 20%;
+  bottom: 1px;
+
+  .-selected- & {
+    bottom: 2px;
+    background: #fff;
+    opacity: .5;
+  }
+}

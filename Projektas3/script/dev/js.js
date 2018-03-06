@@ -1,4 +1,25 @@
 $(document).ready(function () {
+
+    $('#rytas').click(function () {
+        allIn();
+    });
+    function allIn() {
+        var check = $('#forma input');
+        var error = 'Užpildykite visus laukus';
+        var html ='<tr>';
+        check.each(function(i, formInput){
+            if (check.eq(i).val() === '') {
+                alert(error);
+                return false
+            }
+            html +='<td>' + check.eq(i).val() + '</td>';
+        });
+        html +='</tr>';
+        $('.table tbody').append(html);
+    }
+
+    //Datepicker
+
     var eventDates = [1, 10, 12, 22],
         $picker = $('#custom-cells'),
         $content = $('#custom-cells-events'),
@@ -13,7 +34,7 @@ $(document).ready(function () {
             // Add extra element, if `eventDates` contains `currentDate`
             if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
                 return {
-                    html: currentDate + '<span class="dp-note"></span>'
+                    html: currentDate + '<span class="available"></span>'
                 }
             }
         },
