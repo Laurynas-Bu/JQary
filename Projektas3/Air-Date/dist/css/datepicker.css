@@ -603,7 +603,10 @@
     top: calc(50% + 1px);
     left: calc(50% - 1px); }
 
-.datepicker--cell-day.-other-month-, .datepicker--cell-year.-other-decade- {
+.datepicker--cell-day.-other-month-{
+  color: #ffffff;
+}
+.datepicker--cell-year.-other-decade- {
   color: #dedede; }
   .datepicker--cell-day.-other-month-:hover, .datepicker--cell-year.-other-decade-:hover {
     color: #c5c5c5; }
