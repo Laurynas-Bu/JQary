@@ -47,14 +47,7 @@
         $picker = $('#custom-cells'),
         $content = $('#custom-cells-events');
 
-     function allIn() {
-         var check = $(eventTime);
-         var div ='<div class="timeBlock">';
-         check.each(function(i){
-             div += check.eq(i).val ;
-         });
-         div +='</div>';
-     }
+
 
     $picker.datepicker({
         onRenderCell: function (date, cellType) {
