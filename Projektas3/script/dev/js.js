@@ -41,11 +41,20 @@
     ];
     console.log(newArray[1].time[6]);
 
+
     var eventDates = newArray[0].days,
         eventTime = newArray[0].time,
         $picker = $('#custom-cells'),
-        $content = $('#custom-cells-events'),
-        sentences = [];
+        $content = $('#custom-cells-events');
+
+     function allIn() {
+         var check = $(eventTime);
+         var div ='<div class="timeBlock">';
+         check.each(function(i){
+             div += check.eq(i).val ;
+         });
+         div +='</div>';
+     }
 
     $picker.datepicker({
         onRenderCell: function (date, cellType) {
@@ -57,33 +66,17 @@
                 }
             }
         },
-
-    //     $('#rytas').click(function () {
-    //     allIn();
-    // });
-    //  function allIn() {
-    //      var check = $(newArray[index].time);
-    //      var html ='<tr>';
-    //      check.each(function(i){
-    //          if (check.eq(i).val() === '') {
-    //              alert(error);
-    //              return false
-    //          }
-    //          html +='<td>' + check.eq(i).val() + '</td>';
-    //      });
-    //      html +='</tr>';
-    //      $('.table tbody').append(html);
-    //  }
-
         onSelect: function onSelect(fd, date) {
             var title = '', content = '';
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
-                title = fd;
-                content = sentences[Math.floor(Math.random() * eventDates.length)];
+                title = currentDate.getFullYear();
+
+                content = eventTime[Math.floor(eventTime.length * Math.random())];
             }
             $('strong', $content).html(title);
-            $('p', $content).html(content);
+            $('p', $content).html(content[1]);
+            console.log(content)
         }
     });
 
