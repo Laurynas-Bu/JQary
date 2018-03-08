@@ -52,14 +52,8 @@
 
      function eTime() {
          for (var i = 0; i < newArray[0].times.length; i++) ;
-         {
-             for (var k = 0; k < newArray[0].times[i].length; k++) ;
-
-             eventTime = newArray[0].times[i];
-         }
      }
 
-console.log(newArray[0].times[0]);
 
     $picker.datepicker({
         onRenderCell: function (date, cellType) {
@@ -76,7 +70,7 @@ console.log(newArray[0].times[0]);
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = currentDate.getFullYear();
-                content = eventTime[Math.floor(eventTime.length * Math.random())] + ' ';
+                content = eventTime[Math.floor(eventTime.length * Math.random())];
 
             }
             $('strong', $content).html(title);
