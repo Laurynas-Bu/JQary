@@ -13,7 +13,7 @@
         defaults = {
             classes: '',
             inline: true,
-            language: 'lt',
+            language: 'ru',
             startDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
@@ -31,13 +31,13 @@
 
             showOtherMonths: false,
             selectOtherMonths: false,
-            moveToOtherMonthsOnSelect: false,
+            moveToOtherMonthsOnSelect: true,
 
             showOtherYears: true,
             selectOtherYears: true,
             moveToOtherYearsOnSelect: true,
 
-            minDate: new Date(),
+            minDate: '',
             maxDate: '',
             disableNavWhenOutOfRange: true,
 

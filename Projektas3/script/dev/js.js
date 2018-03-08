@@ -50,12 +50,26 @@
          $picker = $('#custom-cells'),
          $content = $('#custom-cells-events');
 
-     function eTime() {
-         for (var i = 0; i < newArray[0].times.length; i++) ;
+     function getTimes(data, selectedDay) {
+         var dayIndex = 0;
+         for(var i = 0; i < (data.days).length; i++){
+             if(data.days[i] == selectedDay){
+                 dayIndex = i;
+             }
+         }
+         return data.times[dayIndex];
      }
 
 
+
     $picker.datepicker({
+        language: 'lt',
+        disableNavWhenOutOfRange: true,
+        moveToOtherMonthsOnSelect: false,
+        minDate: new Date(),
+        maxDate: '',
+        disableNavWhenOutOfRange: false,
+
         onRenderCell: function (date, cellType) {
             var currentDate = date.getDate();
             // Add extra element, if `eventDates` contains `currentDate`
@@ -65,17 +79,26 @@
                 }
             }
         },
+
         onSelect: function onSelect(fd, date) {
             var title = '', content = '';
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = currentDate.getFullYear();
-                content = eventTime[Math.floor(eventTime.length * Math.random())];
+
+                var $dateArray = fd.split('-');
+                var selectedDay = $dateArray[2];
+
+                var times = getTimes( newArray[0], selectedDay );
+
+                console.log(times);
+                //console.log($dateArray);
+
+                content = times;
 
             }
             $('strong', $content).html(title);
             $('p', $content).html(content);
-            console.log(content)
         }
     });
 
