@@ -1,53 +1,65 @@
  $(document).ready(function () {
 
-    //Datepicker
+     //Datepicker
 
-    var newArray = [
-        { days: [1, 2, 5, 6, 10, 12, 22], time: [
-                ['8:00', '8:30', '9:00', '9:30', '10:00'],
-                ['8:30', '9:00', '10:00'],
-                ['8:00', '9:00', '10:00'],
-                ['9:00', '9:30', '10:00'],
-                ['8:00', '8:30', '9:30', '10:00'],
-                ['9:00', '9:30', '10:00'],
-                ['9:00', '10:00']
-            ]
-        },
-        {
-            days: [5, 8, 11, 12, 14, 16, 22, 24, 25, 28], time: [
-            ['12:00', '14:30', '15:00', '15:30'],
-            ['13:00', '13:30', '14:00'],
-            ['12:30', '14:00', '15:00', '15:30'],
-            ['12:00'],
-            ['13:30'],
-            [],
-            ['14:00', '15:00'],
-            ['15:30'],
-            ['15:00', '15:30']
-            ]
-        },
+     var newArray = [
+         {
+             days: [1, 2, 5, 6, 10, 12, 22],
+             times: [
+                 ['8:00', '8:30', '9:00', '9:30', '10:00'],
+                 ['8:30', '9:00', '10:00'],
+                 ['8:00', '9:00', '10:00'],
+                 ['9:00', '9:30', '11:00'],
+                 ['8:00', '8:30', '9:30', '11:30'],
+                 ['9:00', '9:30', '11:30'],
+                 ['9:00', '10:00']
+             ]
+         },
+         {
+             days: [5, 8, 11, 12, 14, 16, 22, 24, 25, 28],
+             times: [
+                 ['12:00', '14:30', '15:00', '15:30'],
+                 ['13:00', '13:30', '14:00'],
+                 ['12:30', '14:00', '15:00', '15:30'],
+                 ['12:00'],
+                 ['13:30'],
+                 ['12:00', '12:30', '15:30'],
+                 ['14:00', '15:00'],
+                 ['15:30'],
+                 ['15:00', '15:30']
+             ]
+         },
 
-        {
-            days: [4 ,11, 15, 20, 22, 26, 27], time: [
-                ['18:00', '18:30'],
-                ['16:00', '16:30', '17:00'],
-                ['16:30', '17:00', '18:00', '18:30'],
-                ['16:30', '18:00'],
-                ['17:00', '18:30'],
-                ['16:00', '17:00'],
-                []
-            ]
-        }
-    ];
-    console.log(newArray[1].time[6]);
-
-
-    var eventDates = newArray[0].days,
-        eventTime = newArray[0].time,
-        $picker = $('#custom-cells'),
-        $content = $('#custom-cells-events');
+         {
+             days: [4, 11, 15, 20, 22, 26, 27],
+             times: [
+                 ['18:00', '18:30'],
+                 ['16:00', '16:30', '17:00'],
+                 ['16:30', '17:00', '18:00', '18:30'],
+                 ['16:30', '18:00'],
+                 ['17:00', '18:30'],
+                 ['16:00', '17:00'],
+                 ['16:30', '17:30', '18:00', '18:30']
+             ]
+         }
+     ];
 
 
+     var eventDates = newArray[0].days,
+         eventTime = newArray[0].times,
+         $picker = $('#custom-cells'),
+         $content = $('#custom-cells-events');
+
+     function eTime() {
+         for (var i = 0; i < newArray[0].times.length; i++) ;
+         {
+             for (var k = 0; k < newArray[0].times[i].length; k++) ;
+
+             eventTime = newArray[0].times[i];
+         }
+     }
+
+console.log(newArray[0].times[0]);
 
     $picker.datepicker({
         onRenderCell: function (date, cellType) {
@@ -64,11 +76,11 @@
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = currentDate.getFullYear();
+                content = eventTime[Math.floor(eventTime.length * Math.random())] + ' ';
 
-                content = eventTime[Math.floor(eventTime.length * Math.random())];
             }
             $('strong', $content).html(title);
-            $('p', $content).html(content[1]);
+            $('p', $content).html(content);
             console.log(content)
         }
     });
