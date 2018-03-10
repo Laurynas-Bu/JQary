@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style>
         .datepicker--cell.-disabled- .available{
-            height: 0;
-            width: 0;
+           visibility: hidden;
         }
         .datepicker--cell.-other-month-.-disabled-{
             visibility: hidden;
@@ -37,6 +36,18 @@
           <p></p>
       </div>
 </div>
+    Selected Seats: <br>
+    <input id="seats" value="">
+
+    <br><br>
+
+    <input type="button" class="seat selected" value="a1">
+    <input type="button" class="seat" value="b2">
+    <input type="button" class="seat" value="c3">
+    <input type="button" class="seat" value="d4">
+    <input type="button" class="seat reserved" value="e5">
+    <input type="button" class="seat" value="f6">
+    <input type="button" class="seat reserved" value="g7">
 </div>
 
 <script src="script/dev/jquery-3.3.1.min.js"></script>
