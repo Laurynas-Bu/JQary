@@ -53,7 +53,7 @@
 
      function getTimes(data, selectedDay) {
          var dayIndex = 0;
-         for(var i = 0; i < (data.days); i++){
+         for(var i = 0; i < (data.days).length; i++){
              if(data.days[i] == selectedDay){
                  dayIndex = i;
              }
@@ -82,30 +82,34 @@
         },
 
         onSelect: function onSelect(fd, date) {
-            var title = '', content = '';
+            var title = '', timesMorning = '';
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = fd;
 
                 var $dateArray = fd.split('-'),
                 selectedDay = $dateArray[2],
+                div ='<div class="times">';
 
                 timesMorning = getTimes(newArray[0], selectedDay),
                 timesNoon = getTimes(newArray[1], selectedDay),
                 timesEvening = getTimes(newArray[2], selectedDay);
 
 
+                div +='<div class="timeBlock">' + timesMorning + '</div>';
+                div +='</div>';
             }
-            console.log ()
+            console.log ();
+
             $('strong', $content).html(title);
-            $('p', $content).html(timesMorning);
+            $($content).html(div);
 
 
         }
 
     });
 
-     
+
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
     $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 10))
