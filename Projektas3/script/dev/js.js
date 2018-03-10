@@ -59,7 +59,6 @@
              }
          }
          return data.times[dayIndex];
-
      }
 
 
@@ -82,31 +81,30 @@
         },
 
         onSelect: function onSelect(fd, date) {
-            var title = '', timesMorning = '';
+            var title = '', div = '';
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = fd;
 
                 var $dateArray = fd.split('-'),
-                selectedDay = $dateArray[2],
-                div ='<div class="times">';
+                    selectedDay = $dateArray[2],
+                    div = '<div class="times">',
 
-                timesMorning = getTimes(newArray[0], selectedDay),
-                timesNoon = getTimes(newArray[1], selectedDay),
-                timesEvening = getTimes(newArray[2], selectedDay);
+                    timesMorning = getTimes(newArray[0], selectedDay),
+                    timesNoon = getTimes(newArray[1], selectedDay),
+                    timesEvening = getTimes(newArray[2], selectedDay);
 
+                div += '<strong>' + title + '</strong>';
 
-                div +='<div class="timeBlock">' + timesMorning + '</div>';
-                div +='</div>';
+                timesMorning.forEach(function (element) {
+                        div += '<div class="timeBlock">'+ (element) + '</div>';
+            });
+                div += '</div>';
             }
-            console.log ();
 
-            $('strong', $content).html(title);
+            console.log(timesMorning);
             $($content).html(div);
-
-
         }
-
     });
 
 
