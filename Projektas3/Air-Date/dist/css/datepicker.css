@@ -625,3 +625,10 @@
   .datepicker--cell-day.-other-month-:empty, .datepicker--cell-year.-other-decade-:empty {
     background: none;
     border: none; }
+
+.datepicker--cell.-disabled- .available{
+  visibility: hidden;
+}
+.datepicker--cell.-other-month-.-disabled-{
+  visibility: hidden;
+}

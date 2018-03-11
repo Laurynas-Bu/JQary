@@ -45,11 +45,14 @@
          }
      ];
 
-     $('#morning').click(function() {
+
 
      var eventDates = newArray[0].days,
          $picker = $('#custom-cells'),
          $content = $('#custom-cells-events');
+
+
+
 
      function getTimes(data, selectedDay) {
          var dayIndex = 0;
@@ -61,8 +64,7 @@
          return data.times[dayIndex];
      }
 
-
-    $picker.datepicker({
+     $picker.datepicker({
         language: 'lt',
         disableNavWhenOutOfRange: true,
         moveToOtherMonthsOnSelect: false,
@@ -78,6 +80,7 @@
                     html: currentDate + '<span class="available"></span>'
                 }
             }
+
         },
 
         onSelect: function onSelect(fd, date) {
@@ -97,22 +100,35 @@
                 div += '<strong>' + title + '</strong>';
 
                 timesMorning.forEach(function (element) {
-                        div += '<div class="timeBlock">'+ (element) + '</div>';
+                        div += '<div class="timeBlock">' + (element) + '</div>';
             });
-                div += '</div>';
             }
-
-            console.log(timesMorning);
             $($content).html(div);
         }
+
+
     });
 
+     // $('#morning').click(function() {
+     //     eventDates = newArray[0].days;
+     // });
+     //
+     // $('#noon').click(function() {
+     //     eventDates = newArray[1].days;
+     // });
+     //
+     // $('#evening').click(function() {
+     //     eventDates = newArray[2].days;
+     // });
+     //
+     // $('#alltimes').click(function() {
+     //     eventDates = newArray[2].days;
+     // });
 
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
-    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 10))
+    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22))
 
-});
 
      //remove seat from list
      function removeSeat(seatListElm, seatValue) {
@@ -182,9 +198,6 @@
                          }
                      }
                  });
-                 if(confirmedSeats.length > 1) {
-                     selectAll(confirmedSeats);
-                 }
              } else {
                  removeSeat(document.getElementById('seats'), seat.value);
              }
@@ -203,11 +216,6 @@
          elms[i].onclick=seatClick;
      }
 
-     function selectAll(seats) {
-         seats.forEach(function(seat) {
-             seat.className = seat.className + ' selected';
-         });
-     }
      /* PS:
       I used this way to keep this simple without the crossbrowser handling,
       but maybe you want to add events by adding/attaching event listener
