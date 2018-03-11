@@ -16,28 +16,17 @@
 <div class="flex">
     <div class="button-holder">
         <div class="laikas">Laikas</div>
-        <input type="button" id="morning" value="Rytas">
-        <input type="button" id="noon" value="Vidurdienis">
-        <input type="button" id="evening" value="Vakaras">
-        <input type="button" id="alltimes" value="Visi">
+        <input type="button" class="timeselectButton" id="morning" value="Rytas">
+        <input type="button" class="timeselectButton" id="noon" value="Vidurdienis">
+        <input type="button" class="timeselectButton" id="evening" value="Vakaras">
+        <input type="button" class="timeselectButton selected" id="alltimes" value="Visi">
     </div>
 
       <div id="custom-cells"></div>
       <div id="custom-cells-events">
       </div>
 </div>
-
-    <input id="seats" value="">
-
-    <br><br>
-
-    <input type="button" class="seat selected" value="a1">
-    <input type="button" class="seat" value="b2">
-    <input type="button" class="seat" value="c3">
-    <input type="button" class="seat" value="d4">
-    <input type="button" class="seat reserved" value="e5">
-    <input type="button" class="seat" value="f6">
-    <input type="button" class="seat reserved" value="g7">
+    <input id="dayTimes" value="">
 </div>
 
 <script src="script/dev/jquery-3.3.1.min.js"></script>

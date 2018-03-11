@@ -40,21 +40,16 @@ body {
     opacity: .5;
 }
 
-.seat {
-    border-style: outset;
-    padding: 1em;
-    background-color: #464;
-    color: #030;
+.timeselectButton {
+    padding: 20px;
+    background-color: #ffffff;
+    color: #008be9;
+    border: none;
+    margin: 3px 0;
+    outline: none;
 }
 
 .selected {
-    border-style: inset;
-    background-color: #0A0;
-    color: #0F0;
-}
-
-.reserved {
-    border-style: outset;
-    background-color: gray;
-    color: darkred;
+    background-color: #008be9;
+    color: #ffffff;
 }

@@ -91,11 +91,13 @@
 
                 var $dateArray = fd.split('-'),
                     selectedDay = $dateArray[2],
+
                     div = '<div class="times">',
 
                     timesMorning = getTimes(newArray[0], selectedDay),
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
+
 
                 div += '<strong>' + title + '</strong>';
 
@@ -106,17 +108,18 @@
             $($content).html(div);
         }
 
-
     });
 
-     // $('#morning').click(function() {
-     //     eventDates = newArray[0].days;
-     // });
-     //
-     // $('#noon').click(function() {
-     //     eventDates = newArray[1].days;
-     // });
-     //
+      $('#morning').click(function() {
+         eventDates = newArray[0].days;
+
+     });
+
+      $('#noon').click(function() {
+          eventDates = newArray[1].days;
+
+      });
+
      // $('#evening').click(function() {
      //     eventDates = newArray[2].days;
      // });
@@ -127,62 +130,62 @@
 
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
-    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22))
+    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
 
 
-     //remove seat from list
-     function removeSeat(seatListElm, seatValue) {
-         var arr=seatListElm.value.split(',');
+     //remove dayTime from list
+     function removedayTime(dayTimeListElm, dayTimeValue) {
+         var arr=dayTimeListElm.value.split(',');
 
-         var p=arr.indexOf(seatValue);
+         var p=arr.indexOf(dayTimeValue);
          if(p!=-1){
              arr.splice(p, 1);
-             seatListElm.value=arr.join(',');
+             dayTimeListElm.value=arr.join(',');
          }
      }
 
 
-//add seat to list
-     function addSeat(seatListElm, seatValue) {
-         var arr=seatListElm.value.split(',');
+//add dayTime to list
+     function adddayTime(dayTimeListElm, dayTimeValue) {
+         var arr=dayTimeListElm.value.split(',');
          if(arr.join()==''){ arr=[]; }
 
-         var p=arr.indexOf(seatValue);
+         var p=arr.indexOf(dayTimeValue);
          if(p==-1){
-             arr.push(seatValue); //append
+             arr.push(dayTimeValue); //append
              arr=arr.sort(); //sort list
-             seatListElm.value=arr.join(',');
+             dayTimeListElm.value=arr.join(',');
          }
      }
 
-//called everytime a seat is clicked
-     function seatClick(seat) {
-         seat = (this instanceof HTMLInputElement ) ? this : seat;
+//called everytime a dayTime is clicked
+     function dayTimeClick(dayTime) {
+         dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;
          var firstSelected;
-         var selectedSeats = [];
+         var selecteddayTimes = [];
          var thisInputHasAlreadyBeenSeen = false;
-         var confirmedSeats = [];
-         if (seat.classList.contains('reserved')==false) {
-
-             if (seat.classList.toggle('selected')) {
-                 addSeat(document.getElementById('seats'), seat.value);
-                 $(".seat").each(function() {
-                     if(this != seat) {
+         var confirmeddayTimes = [];
+         if (dayTime.classList.contains('none')==false)
+         {
+             if (dayTime.classList.toggle('selected')) {
+                 adddayTime(document.getElementById('dayTimes'), dayTime.value);
+                 $(".dayTime").each(function() {
+                     if(this != dayTime) {
                          if(firstSelected == null && this.classList.contains('selected')) {
                              firstSelected = this;
-                             selectedSeats.push(firstSelected);
-                             confirmedSeats = selectedSeats.slice();
+                             selecteddayTimes.push(firstSelected);
+                             confirmeddayTimes = selecteddayTimes.slice();
                          } else if (firstSelected) {
                              if(this.classList.contains('selected')) {
-                                 selectedSeats.push(this);
-                                 confirmedSeats = selectedSeats.slice();
+                                 selecteddayTimes.push(this);
+                                 confirmeddayTimes = selecteddayTimes.slice();
                              }
-                             if(!this.classList.contains('reserved')) {
-                                 selectedSeats.push(this);
+                             if(!this.classList.contains('none')) {
+                                 selecteddayTimes.push(this);
                              }
                              else{
                                  if(!thisInputHasAlreadyBeenSeen) {
-                                     selectedSeats = [];
+                                     selecteddayTimes = [];
                                      firstSelected = null;
                                  } else {
                                      return false;
@@ -190,8 +193,8 @@
                              }
                          }
                      } else {
-                         selectedSeats.push(this);
-                         confirmedSeats = selectedSeats.slice();
+                         selecteddayTimes.push(this);
+                         confirmeddayTimes = selecteddayTimes.slice();
                          if(firstSelected == null) {
                              thisInputHasAlreadyBeenSeen = true;
                              firstSelected = this;
@@ -199,26 +202,19 @@
                      }
                  });
              } else {
-                 removeSeat(document.getElementById('seats'), seat.value);
+                 removedayTime(document.getElementById('dayTimes'), dayTime.value);
              }
 
          } else {
-             alert("This seat is reserved!\nPlease select another seat");
-             removeSeat(document.getElementById('seats'), seat.value);
+             alert("This dayTime is reserved!\nPlease select another dayTime");
+             removedayTime(document.getElementById('dayTimes'), dayTime.value);
              return;
          }
      }
-
-
-//adding event click to seats
-     var elms=document.getElementsByClassName('seat');
+//adding event click to dayTimes
+     var elms = document.getElementsByClassName('timeselectButton');
      for(var i=0, l=elms.length ; i<l ; i++){
-         elms[i].onclick=seatClick;
+         elms[i].onclick = dayTimeClick;
      }
-
-     /* PS:
-      I used this way to keep this simple without the crossbrowser handling,
-      but maybe you want to add events by adding/attaching event listener
-     */
  });
 
