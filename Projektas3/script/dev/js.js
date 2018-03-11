@@ -51,8 +51,9 @@
          $picker = $('#custom-cells'),
          $content = $('#custom-cells-events');
 
-
-
+     var date = new Date();
+     var maxdate = new Date();
+     maxdate.setMonth(date.getMonth() + 3);
 
      function getTimes(data, selectedDay) {
          var dayIndex = 0;
@@ -65,11 +66,13 @@
      }
 
      $picker.datepicker({
+
         language: 'lt',
         disableNavWhenOutOfRange: true,
+        changeMonth: true,
         moveToOtherMonthsOnSelect: false,
         minDate: new Date(),
-        maxDate: '',
+        maxDate: maxdate,
         disableNavWhenOutOfRange: false,
 
         onRenderCell: function (date, cellType) {
