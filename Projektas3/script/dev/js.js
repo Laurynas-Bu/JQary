@@ -93,14 +93,15 @@
 
                 var $dateArray = fd.split('-'),
                     selectedDay = $dateArray[2],
-
                     div = '<div class="times">',
+
                     timesMorning = getTimes(newArray[0], selectedDay),
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
 
+                // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
 
-                    timesMorning = timesMorning.concat(timesNoon, timesEvening);
+                    timesMorning = timesMorning.concat(timesNoon);
 
                 div += '<strong>' + title + '</strong>';
 
@@ -175,10 +176,6 @@
                      } else {
                          selecteddayTimes.push(this);
                          confirmeddayTimes = selecteddayTimes.slice();
-                         if (firstSelected == null) {
-                             thisInputHasAlreadyBeenSeen = true;
-                             firstSelected = this;
-                         }
                      }
                  });
              } else {
@@ -208,8 +205,5 @@
  //
  // // $('#evening').click(function() {
  // //     eventDates = newArray[2].days;
- // // });
- // //
- // // $('#alltimes').click(function() {
- // //     eventDates = newArray[2].days;
+ //
  // // });
