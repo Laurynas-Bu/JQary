@@ -47,13 +47,13 @@
 
 
 
-     var eventDates = newArray[0].days,
+     var eventDates = newArray[0].days.concat(newArray[1].days),
          $picker = $('#custom-cells'),
-         $content = $('#custom-cells-events');
+         $content = $('#custom-cells-events'),
 
-     var date = new Date();
-     var maxdate = new Date();
-     maxdate.setMonth(date.getMonth() + 3);
+     date = new Date(),
+     maxdate = new Date();
+     maxdate.setMonth(date.getMonth() + 2);
 
      function getTimes(data, selectedDay) {
          var dayIndex = 0;
@@ -69,7 +69,6 @@
 
         language: 'lt',
         disableNavWhenOutOfRange: true,
-        changeMonth: true,
         moveToOtherMonthsOnSelect: false,
         minDate: new Date(),
         maxDate: maxdate,
@@ -82,8 +81,8 @@
                 return {
                     html: currentDate + '<span class="available"></span>'
                 }
-            }
 
+            }
         },
 
         onSelect: function onSelect(fd, date) {
@@ -96,16 +95,18 @@
                     selectedDay = $dateArray[2],
 
                     div = '<div class="times">',
-
                     timesMorning = getTimes(newArray[0], selectedDay),
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
 
 
+                    timesMorning = timesMorning.concat(timesNoon, timesEvening);
+
                 div += '<strong>' + title + '</strong>';
 
                 timesMorning.forEach(function (element) {
                         div += '<div class="timeBlock">' + (element) + '</div>';
+
             });
             }
             $($content).html(div);
@@ -113,27 +114,11 @@
 
     });
 
-      $('#morning').click(function() {
-         eventDates = newArray[0].days;
-
-     });
-
-      $('#noon').click(function() {
-          eventDates = newArray[1].days;
-
-      });
-
-     // $('#evening').click(function() {
-     //     eventDates = newArray[2].days;
-     // });
-     //
-     // $('#alltimes').click(function() {
-     //     eventDates = newArray[2].days;
-     // });
 
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
     $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
+
 
 
      //remove dayTime from list
@@ -146,7 +131,6 @@
              dayTimeListElm.value=arr.join(',');
          }
      }
-
 
 //add dayTime to list
      function adddayTime(dayTimeListElm, dayTimeValue) {
@@ -168,37 +152,30 @@
          var selecteddayTimes = [];
          var thisInputHasAlreadyBeenSeen = false;
          var confirmeddayTimes = [];
-         if (dayTime.classList.contains('none')==false)
-         {
+         if (dayTime.classList.contains('none')==false) {
+
              if (dayTime.classList.toggle('selected')) {
-                 adddayTime(document.getElementById('dayTimes'), dayTime.value);
-                 $(".dayTime").each(function() {
-                     if(this != dayTime) {
-                         if(firstSelected == null && this.classList.contains('selected')) {
+                 adddayTime (document.getElementById('dayTimes'), dayTime.value);
+                 $(".dayTime").each(function () {
+                     if (this != dayTime) {
+                         if (firstSelected == null && this.classList.contains('selected')) {
                              firstSelected = this;
                              selecteddayTimes.push(firstSelected);
                              confirmeddayTimes = selecteddayTimes.slice();
+
                          } else if (firstSelected) {
-                             if(this.classList.contains('selected')) {
+                             if (this.classList.contains('selected')) {
                                  selecteddayTimes.push(this);
                                  confirmeddayTimes = selecteddayTimes.slice();
                              }
-                             if(!this.classList.contains('none')) {
+                             if (!this.classList.contains('none')) {
                                  selecteddayTimes.push(this);
-                             }
-                             else{
-                                 if(!thisInputHasAlreadyBeenSeen) {
-                                     selecteddayTimes = [];
-                                     firstSelected = null;
-                                 } else {
-                                     return false;
-                                 }
                              }
                          }
                      } else {
                          selecteddayTimes.push(this);
                          confirmeddayTimes = selecteddayTimes.slice();
-                         if(firstSelected == null) {
+                         if (firstSelected == null) {
                              thisInputHasAlreadyBeenSeen = true;
                              firstSelected = this;
                          }
@@ -207,17 +184,32 @@
              } else {
                  removedayTime(document.getElementById('dayTimes'), dayTime.value);
              }
-
-         } else {
-             alert("This dayTime is reserved!\nPlease select another dayTime");
-             removedayTime(document.getElementById('dayTimes'), dayTime.value);
-             return;
          }
      }
 //adding event click to dayTimes
-     var elms = document.getElementsByClassName('timeselectButton');
+     var elms = $('.timeselectButton');
      for(var i=0, l=elms.length ; i<l ; i++){
          elms[i].onclick = dayTimeClick;
+
      }
+
  });
 
+
+ //  $('#morning').click(function() {
+ //     eventDates = newArray[0].days;
+ //
+ // });
+ //
+ //  $('#noon').click(function() {
+ //      eventDates = newArray[1].days;
+ //
+ //  });
+ //
+ // // $('#evening').click(function() {
+ // //     eventDates = newArray[2].days;
+ // // });
+ // //
+ // // $('#alltimes').click(function() {
+ // //     eventDates = newArray[2].days;
+ // // });
