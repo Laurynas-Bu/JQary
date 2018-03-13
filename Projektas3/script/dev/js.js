@@ -1,7 +1,4 @@
  $(document).ready(function () {
-
-     //Datepicker
-
      var newArray = [
          {
              days: [1, 4, 8, 12, 17, 20, 22],
@@ -44,191 +41,128 @@
              ]
          }
      ];
+     //Datepicker
 
+     $('.timeselectButton').on('click', function () {
+         $('.timeselectButton.selected').removeClass('selected');
+         $(this).addClass('selected');
 
-
-     var eventDates = newArray[0].days.concat(newArray[1].days),
-         $picker = $('#custom-cells'),
-         $content = $('#custom-cells-events'),
-
-     date = new Date(),
-     maxdate = new Date();
-     maxdate.setMonth(date.getMonth() + 2);
-
-     function getTimes(data, selectedDay) {
-         var dayIndex = 0;
-         for(var i = 0; i < (data.days).length; i++){
-             if(data.days[i] == selectedDay){
-                 dayIndex = i;
-             }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
+         var $selectedDayType = $(this).attr('id');
+         var $selectedDayTypeIndex = 3;
+         switch ($selectedDayType){
+             case 'morning':
+                 $selectedDayTypeIndex = 0;
+                 break;
+             case 'noon':
+                 $selectedDayTypeIndex = 1;
+                 break;
+             case 'evening':
+                 $selectedDayTypeIndex = 2;
+                 break;
+             default:
+                 $selectedDayTypeIndex = 3;
          }
-         return data.times[dayIndex];
 
+         var $daysByType = [];
+
+         if($selectedDayTypeIndex == 3){
+             for(var i = 0; i < newArray.length; i++){
+                 $daysByType = $daysByType.concat(newArray[i].days);
+             }
+             $daysByType = uniq($daysByType);
+         }else{
+             var $daysByType = newArray[$selectedDayTypeIndex].days;
+         }
+
+         $daysByType = $daysByType.sort(function(a, b){return a-b});
+
+         var eventDates = $daysByType,
+             $picker = $('#custom-cells'),
+             $content = $('#custom-cells-events'),
+
+             date = new Date(),
+             maxdate = new Date();
+
+         maxdate.setMonth(date.getMonth() + 2)
+
+         $picker.datepicker({
+             language: 'lt',
+             disableNavWhenOutOfRange: true,
+             moveToOtherMonthsOnSelect: false,
+             minDate: new Date(),
+             maxDate: maxdate,
+             disableNavWhenOutOfRange: false,
+
+             onRenderCell: function (date, cellType) {
+                 var currentDate = date.getDate();
+                 // Add extra element, if `eventDates` contains `currentDate`
+                 if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
+                     return {
+                         html: currentDate + '<span class="available"></span>'
+                     }
+                 }
+             },
+
+             onSelect: function onSelect(fd, date) {
+                 var title = '', div = '';
+                 // If date with event is selected, show it
+                 if (date && eventDates.indexOf(date.getDate()) != -1) {
+                     title = fd;
+                     var $dateArray = fd.split('-'),
+                         selectedDay = $dateArray[2],
+                         div = '<div class="times">';
+
+                        var times = getTimes(newArray, selectedDay, $selectedDayTypeIndex);
+
+
+                     div += '<strong>' + title + '</strong>';
+                     times.forEach(function (element) {
+                         div += '<div class="timeBlock">' + (element) + '</div>';
+
+                     });
+                 }
+                 $($content).html(div);
+             }
+         });
+
+         // Select initial date from `eventDates`
+         var currentDate = currentDate = new Date();
+         $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22)); //pradeti nuo artimiausios datos
+
+     });
+
+     function uniq(a) {
+         return a.sort().filter(function(item, pos, ary) {
+             return !pos || item != ary[pos - 1];
+         })
      }
 
-     $picker.datepicker({
 
-        language: 'lt',
-        disableNavWhenOutOfRange: true,
-        moveToOtherMonthsOnSelect: false,
-        minDate: new Date(),
-        maxDate: maxdate,
-        disableNavWhenOutOfRange: false,
+     function getTimes(data, selectedDay, filter) {
+         var dayIndex = 0;
+         var $times = [];
+         if(filter !=  3){
+             for(var i = 0; i < (data[filter].days).length; i++){
+                 if(data[filter].days[i] == selectedDay){
+                     dayIndex = i;
+                 }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
+             }
+             $times = data[filter].times[dayIndex];
+         }else{
 
-        onRenderCell: function (date, cellType) {
-            var currentDate = date.getDate();
-            // Add extra element, if `eventDates` contains `currentDate`
-            if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
-                return {
-                    html: currentDate + '<span class="available"></span>'
-                }
-            }
-        },
-
-        onSelect: function onSelect(fd, date) {
-            var title = '', div = '';
-            // If date with event is selected, show it
-            if (date && eventDates.indexOf(date.getDate()) != -1) {
-                title = fd;
-                var $dateArray = fd.split('-'),
-                    selectedDay = $dateArray[2],
-                    div = '<div class="times">',
-
-                    timesMorning = getTimes(newArray[0], selectedDay),
-                    timesNoon = getTimes(newArray[1], selectedDay),
-                    timesEvening = getTimes(newArray[2], selectedDay);
-
-                    timesMorning = timesMorning.concat(timesNoon);
-
-
-                div += '<strong>' + title + '</strong>';
-                timesMorning.forEach(function (element) {
-                        div += '<div class="timeBlock">' + (element) + '</div>';
-
-            });
-            }
-            $($content).html(div);
-        }
-    });
-
-
-// Select initial date from `eventDates`
-    var currentDate = currentDate = new Date();
-    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22)); //pradeti nuo artimiausios datos
-
-
-//      //remove dayTime from list
-//      function removedayTime(dayTimeListElm, dayTimeValue) {
-//          var arr = dayTimeListElm.value.split(',');            // keisti (timesMorning ?)
-//
-//          var p = arr.indexOf(dayTimeValue);
-//          if(p != -1){
-//              arr.splice(p, 1);
-//              dayTimeListElm.value=arr.join(',');
-//          }
-//      }
-//
-// //add dayTime to list
-//      function adddayTime(dayTimeListElm, dayTimeValue) {
-//          var arr = dayTimeListElm.value.split(',');           //keisti var arr = (timesMorning ?)
-//          if(arr.join() == ''){ arr = []; }
-//
-//          var p = arr.indexOf(dayTimeValue);
-//          if(p == -1){
-//              arr.push(dayTimeValue); //append
-//              arr = arr.sort(); //sort list
-//              dayTimeListElm.value = arr.join(',');
-//          }
-//      }
-//
-//
-//      //https://jsfiddle.net/7J8vj/94/ - seatpicker
-//
-// //called everytime a dayTime is clicked
-//
-//      function dayTimeClick(dayTime) {
-//          dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;  // kas tai?
-//          var firstSelected;
-//          var selecteddayTimes = [];
-//          if (dayTime.classList.contains('none')==false) {
-//
-//              if (dayTime.classList.toggle('selected')) {
-//                  adddayTime (document.getElementById('dayTimes'), dayTime.value);  //ideti daypickeri
-//
-//
-//                  $(".dayTime").each(function () {  //as tureciau kreiptis i
-//                      if (this != dayTime) {
-//                          if (firstSelected == null && this.classList.contains('selected')) {
-//                              firstSelected = this;
-//                              selecteddayTimes.push(firstSelected);
-//
-//                          } else if (firstSelected) {
-//                              if (this.classList.contains('selected')) {
-//                                  selecteddayTimes.push(this);
-//                              }
-//                              if (!this.classList.contains('none')) {
-//                                  selecteddayTimes.push(this);
-//                              }
-//                          }
-//                      } else {
-//                          selecteddayTimes.push(this);
-//                      }
-//                  });
-//
-//              } else {
-//                  removedayTime(document.getElementById('dayTimes'), dayTime.value);
-//              }
-//          }
-//      }
-//
-// //adding event click to dayTimes
-//      var elem = $('.timeselectButton');
-//      for(var i=0, j=elem.length ; i<j ; i++){
-//          elem[i].onclick = dayTimeClick;
-//      }
-
-
-  $('#morning').click(function() {
-      eventDates = newArray[0].days;
-      var datepicker = $picker.datepicker().data('datepicker');
-      datepicker.clear();
-
-      $picker.datepicker({
-
-     onRenderCell: function (date, cellType) {
-         var currentDate = date.getDate();
-         // Add extra element, if `eventDates` contains `currentDate`
-         if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
-             return {
-                 html: currentDate + '<span class="available"></span>'
+             for(var i = 0; i < data.length; i++){
+                 for(var j = 0; j < (data[i].days).length; j++){
+                     if(data[i].days[j] == selectedDay){
+                         dayIndex = j;
+                     }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
+                 }
+                 $times = $times.concat(data[i].times[dayIndex]);
              }
          }
-     },
 
-     onSelect: function onSelect(fd, date) {
-         var title = '', div = '';
-         // If date with event is selected, show it
-         if (date && eventDates.indexOf(date.getDate()) != -1) {
-             title = fd;
-             var $dateArray = fd.split('-'),
-                 selectedDay = $dateArray[2],
-                 div = '<div class="times">',
+         return $times;
 
-                 timesMorning = getTimes(newArray[0], selectedDay),
-                 timesNoon = getTimes(newArray[1], selectedDay),
-                 timesEvening = getTimes(newArray[2], selectedDay);
-
-
-
-             div += '<strong>' + title + '</strong>';
-             timesMorning.forEach(function (element) {
-                 div += '<div class="timeBlock">' + (element) + '</div>';
-
-             });
-         }
-         $($content).html(div);
      }
- });
 
  // });
  //
@@ -242,5 +176,4 @@
  //
  // // });
 
- });
  });
