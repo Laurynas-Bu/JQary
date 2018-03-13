@@ -108,7 +108,6 @@
             }
             $($content).html(div);
         }
-
     });
 
 // Select initial date from `eventDates`
