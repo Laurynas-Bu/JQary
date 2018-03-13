@@ -47,7 +47,7 @@
 
 
 
-     var eventDates = newArray[0].days.concat(newArray[1].days),
+     var eventDates = newArray[0].days,
          $picker = $('#custom-cells'),
          $content = $('#custom-cells-events'),
 
@@ -80,8 +80,8 @@
             if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
                 return {
                     html: currentDate + '<span class="available"></span>'
-                }
 
+                }
             }
         },
 
@@ -99,10 +99,6 @@
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
 
-                // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
-
-                    timesMorning = timesMorning.concat(timesNoon);
-
                 div += '<strong>' + title + '</strong>';
 
                 timesMorning.forEach(function (element) {
@@ -115,11 +111,9 @@
 
     });
 
-
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
     $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
-
 
 
      //remove dayTime from list
@@ -138,11 +132,11 @@
          var arr=dayTimeListElm.value.split(',');
          if(arr.join()==''){ arr=[]; }
 
-         var p=arr.indexOf(dayTimeValue);
-         if(p==-1){
+         var p = arr.indexOf(dayTimeValue);
+         if(p == -1){
              arr.push(dayTimeValue); //append
-             arr=arr.sort(); //sort list
              dayTimeListElm.value=arr.join(',');
+
          }
      }
 
@@ -151,8 +145,9 @@
          dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;
          var firstSelected;
          var selecteddayTimes = [];
-         var thisInputHasAlreadyBeenSeen = false;
          var confirmeddayTimes = [];
+
+
          if (dayTime.classList.contains('none')==false) {
 
              if (dayTime.classList.toggle('selected')) {
@@ -187,9 +182,7 @@
      var elms = $('.timeselectButton');
      for(var i=0, l=elms.length ; i<l ; i++){
          elms[i].onclick = dayTimeClick;
-
      }
-
  });
 
 
