@@ -60,9 +60,10 @@
          for(var i = 0; i < (data.days).length; i++){
              if(data.days[i] == selectedDay){
                  dayIndex = i;
-             }
+             }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
          }
          return data.times[dayIndex];
+
      }
 
      $picker.datepicker({
@@ -89,7 +90,6 @@
             // If date with event is selected, show it
             if (date && eventDates.indexOf(date.getDate()) != -1) {
                 title = fd;
-
                 var $dateArray = fd.split('-'),
                     selectedDay = $dateArray[2],
                     div = '<div class="times">',
@@ -98,10 +98,7 @@
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
 
-
-
                     timesMorning = timesMorning.concat(timesNoon);
-
 
 
                 div += '<strong>' + title + '</strong>';
@@ -119,14 +116,15 @@
 
 // Select initial date from `eventDates`
     var currentDate = currentDate = new Date();
-    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
+    $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22)); //pradeti nuo artimiausios datos
+
 
      //remove dayTime from list
      function removedayTime(dayTimeListElm, dayTimeValue) {
-         var arr = dayTimeListElm.value.split(',');
+         var arr = dayTimeListElm.value.split(',');            // keisti
 
          var p = arr.indexOf(dayTimeValue);
-         if(p!= -1){
+         if(p != -1){
              arr.splice(p, 1);
              dayTimeListElm.value=arr.join(',');
          }
@@ -134,40 +132,41 @@
 
 //add dayTime to list
      function adddayTime(dayTimeListElm, dayTimeValue) {
-         var arr = dayTimeListElm.value.split(',');
+         var arr = dayTimeListElm.value.split(',');           //keisti
          if(arr.join() == ''){ arr = []; }
 
          var p = arr.indexOf(dayTimeValue);
          if(p == -1){
              arr.push(dayTimeValue); //append
              arr=arr.sort(); //sort list
-             dayTimeListElm.value=arr.join(',');
+             dayTimeListElm.value = arr.join(',');
          }
      }
 
+
+     //https://jsfiddle.net/7J8vj/94/ - seatpicker
+
 //called everytime a dayTime is clicked
+
      function dayTimeClick(dayTime) {
-         dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;
+         dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;  // kas tai?
          var firstSelected;
          var selecteddayTimes = [];
-         var confirmeddayTimes = [];
          if (dayTime.classList.contains('none')==false) {
 
              if (dayTime.classList.toggle('selected')) {
-                 adddayTime (document.getElementById('dayTimes'), dayTime.value);  //kopijuoti daypickeri
+                 adddayTime (document.getElementById('dayTimes'), dayTime.value);  //ideti daypickeri
 
 
-                 $(".dayTime").each(function () {
+                 $(".dayTime").each(function () {  //as tureciau kreiptis i
                      if (this != dayTime) {
                          if (firstSelected == null && this.classList.contains('selected')) {
                              firstSelected = this;
                              selecteddayTimes.push(firstSelected);
-                             confirmeddayTimes = selecteddayTimes.slice();
 
                          } else if (firstSelected) {
                              if (this.classList.contains('selected')) {
                                  selecteddayTimes.push(this);
-                                 confirmeddayTimes = selecteddayTimes.slice();
                              }
                              if (!this.classList.contains('none')) {
                                  selecteddayTimes.push(this);
@@ -175,19 +174,19 @@
                          }
                      } else {
                          selecteddayTimes.push(this);
-                         confirmeddayTimes = selecteddayTimes.slice();
                      }
                  });
+
              } else {
                  removedayTime(document.getElementById('dayTimes'), dayTime.value);
              }
          }
      }
+
 //adding event click to dayTimes
      var elms = $('.timeselectButton');
-     for(var i=0, l=elms.length ; i<l ; i++){
+     for(var i=0, j=elms.length ; i<j ; i++){
          elms[i].onclick = dayTimeClick;
-
      }
 
  });
