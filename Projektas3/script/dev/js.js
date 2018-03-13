@@ -81,7 +81,6 @@
                 return {
                     html: currentDate + '<span class="available"></span>'
                 }
-
             }
         },
 
@@ -99,17 +98,19 @@
                     timesNoon = getTimes(newArray[1], selectedDay),
                     timesEvening = getTimes(newArray[2], selectedDay);
 
-                // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
+
 
                     timesMorning = timesMorning.concat(timesNoon);
 
-                div += '<strong>' + title + '</strong>';
 
+
+                div += '<strong>' + title + '</strong>';
                 timesMorning.forEach(function (element) {
                         div += '<div class="timeBlock">' + (element) + '</div>';
 
             });
             }
+
             $($content).html(div);
         }
 
@@ -120,14 +121,12 @@
     var currentDate = currentDate = new Date();
     $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
 
-
-
      //remove dayTime from list
      function removedayTime(dayTimeListElm, dayTimeValue) {
-         var arr=dayTimeListElm.value.split(',');
+         var arr = dayTimeListElm.value.split(',');
 
-         var p=arr.indexOf(dayTimeValue);
-         if(p!=-1){
+         var p = arr.indexOf(dayTimeValue);
+         if(p!= -1){
              arr.splice(p, 1);
              dayTimeListElm.value=arr.join(',');
          }
@@ -135,11 +134,11 @@
 
 //add dayTime to list
      function adddayTime(dayTimeListElm, dayTimeValue) {
-         var arr=dayTimeListElm.value.split(',');
-         if(arr.join()==''){ arr=[]; }
+         var arr = dayTimeListElm.value.split(',');
+         if(arr.join() == ''){ arr = []; }
 
-         var p=arr.indexOf(dayTimeValue);
-         if(p==-1){
+         var p = arr.indexOf(dayTimeValue);
+         if(p == -1){
              arr.push(dayTimeValue); //append
              arr=arr.sort(); //sort list
              dayTimeListElm.value=arr.join(',');
@@ -151,12 +150,13 @@
          dayTime = (this instanceof HTMLInputElement ) ? this : dayTime;
          var firstSelected;
          var selecteddayTimes = [];
-         var thisInputHasAlreadyBeenSeen = false;
          var confirmeddayTimes = [];
          if (dayTime.classList.contains('none')==false) {
 
              if (dayTime.classList.toggle('selected')) {
-                 adddayTime (document.getElementById('dayTimes'), dayTime.value);
+                 adddayTime (document.getElementById('dayTimes'), dayTime.value);  //kopijuoti daypickeri
+
+
                  $(".dayTime").each(function () {
                      if (this != dayTime) {
                          if (firstSelected == null && this.classList.contains('selected')) {

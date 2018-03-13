@@ -223,13 +223,13 @@
             if (typeof lang == 'string') {
                 this.loc = $.fn.datepicker.language[lang];
                 if (!this.loc) {
-                    console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "lt" instead');
-                    this.loc = $.extend(true, {}, $.fn.datepicker.language.lt)
+                    console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "ru" instead');
+                    this.loc = $.extend(true, {}, $.fn.datepicker.language.ru)
                 }
 
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.lt, $.fn.datepicker.language[lang])
+                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, $.fn.datepicker.language[lang])
             } else {
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.lt, lang)
+                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, lang)
             }
 
             if (this.opts.dateFormat) {
