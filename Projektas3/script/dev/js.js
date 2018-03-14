@@ -1,4 +1,4 @@
- $(document).ready(function () {
+$(document).ready(function () {
      var newArray = [
          {
              days: [1, 4, 8, 12, 17, 20, 22],
@@ -41,6 +41,7 @@
              ]
          }
      ];
+
      //Datepicker
 
      $('.timeselectButton').on('click', function () {
@@ -49,6 +50,7 @@
 
          var $selectedDayType = $(this).attr('id');
          var $selectedDayTypeIndex = 3;
+
          switch ($selectedDayType){
              case 'morning':
                  $selectedDayTypeIndex = 0;
@@ -82,8 +84,36 @@
 
              date = new Date(),
              maxdate = new Date();
+             maxdate.setMonth(date.getMonth() + 2);
 
-         maxdate.setMonth(date.getMonth() + 2)
+         function uniq(a) {
+             return a.sort().filter(function(item, pos, ary) {
+                 return !pos || item != ary[pos - 1];
+             })
+         }
+
+         function getTimes(data, selectedDay, filter) {
+             var dayIndex = 0;
+             var $times = [];
+             if(filter !=  3){
+                 for(var i = 0; i < (data[filter].days).length; i++){
+                     if(data[filter].days[i] == selectedDay){
+                         dayIndex = i;
+                     }
+                 }
+                 $times = data[filter].times[dayIndex];
+             }else{
+                 for(var i = 0; i < data.length; i++){
+                     for(var j = 0; j < (data[i].days).length; j++){
+                         if(data[i].days[j] == selectedDay){
+                             dayIndex = j;
+                         }
+                     }
+                     $times = $times.concat(data[i].times[dayIndex]);
+                 }
+             }
+             return $times;
+         }
 
          $picker.datepicker({
              language: 'lt',
@@ -91,11 +121,10 @@
              moveToOtherMonthsOnSelect: false,
              minDate: new Date(),
              maxDate: maxdate,
-             disableNavWhenOutOfRange: false,
+             disableNavWhenOutOfRange: true,
 
              onRenderCell: function (date, cellType) {
                  var currentDate = date.getDate();
-                 // Add extra element, if `eventDates` contains `currentDate`
                  if (cellType == 'day' && eventDates.indexOf(currentDate) != -1) {
                      return {
                          html: currentDate + '<span class="available"></span>'
@@ -105,7 +134,6 @@
 
              onSelect: function onSelect(fd, date) {
                  var title = '', div = '';
-                 // If date with event is selected, show it
                  if (date && eventDates.indexOf(date.getDate()) != -1) {
                      title = fd;
                      var $dateArray = fd.split('-'),
@@ -113,7 +141,6 @@
                          div = '<div class="times">';
 
                         var times = getTimes(newArray, selectedDay, $selectedDayTypeIndex);
-
 
                      div += '<strong>' + title + '</strong>';
                      times.forEach(function (element) {
@@ -127,53 +154,6 @@
 
          // Select initial date from `eventDates`
          var currentDate = currentDate = new Date();
-         $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22)); //pradeti nuo artimiausios datos
-
+         $picker.data('datepicker').selectDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 22));
      });
-
-     function uniq(a) {
-         return a.sort().filter(function(item, pos, ary) {
-             return !pos || item != ary[pos - 1];
-         })
-     }
-
-
-     function getTimes(data, selectedDay, filter) {
-         var dayIndex = 0;
-         var $times = [];
-         if(filter !=  3){
-             for(var i = 0; i < (data[filter].days).length; i++){
-                 if(data[filter].days[i] == selectedDay){
-                     dayIndex = i;
-                 }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
-             }
-             $times = data[filter].times[dayIndex];
-         }else{
-
-             for(var i = 0; i < data.length; i++){
-                 for(var j = 0; j < (data[i].days).length; j++){
-                     if(data[i].days[j] == selectedDay){
-                         dayIndex = j;
-                     }                                      //Cia ideti else(if)? filtravimui/pridejimui tik tos dienos data
-                 }
-                 $times = $times.concat(data[i].times[dayIndex]);
-             }
-         }
-
-         return $times;
-
-     }
-
- // });
- //
- //  $('#noon').click(function() {
- //      eventDates = newArray[1].days;
- //
- //  });
- //
- // // $('#evening').click(function() {
- // //     eventDates = newArray[2].days;
- //
- // // });
-
  });

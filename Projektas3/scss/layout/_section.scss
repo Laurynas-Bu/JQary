@@ -13,16 +13,16 @@
 
 .available {
   position: absolute;
-  background: #cccccc;
-  width: 4px;
-  height: 4px;
-  border-radius: 20%;
-  bottom: 1px;
+  border: 1px solid #008be9;
+  width: 40px;
+  height: 36px;
+  border-radius: 10%;
+  left: 0;
+  bottom: 0;
+
 
   .-selected- & {
-    bottom: 2px;
-    background: #fff;
-    opacity: .5;
+    bottom: 0;
   }
 }
 .timeselectButton {

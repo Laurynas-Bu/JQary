@@ -46,7 +46,7 @@
   height: 32px;
   z-index: 1; }
   .datepicker--cell.-focus- {
-    background: #f0f0f0; }
+    background: #ffffff; }
   .datepicker--cell.-current- {
     color: #008be9; }
     .datepicker--cell.-current-.-focus- {
